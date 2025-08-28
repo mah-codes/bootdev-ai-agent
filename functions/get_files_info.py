@@ -10,10 +10,6 @@ def get_files_info(working_directory, directory="."):
     abs_tgt = os.path.abspath(tgt_dir)
     abs_working = os.path.abspath(working_directory)
 
-    # !!!!!
-    # needs to have somewhere comparing os.path.abspath() of tgt with working_dir
-    # !!!!!
-
     if not abs_tgt.startswith(abs_working):
         return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
     if not os.path.isdir(abs_tgt):
