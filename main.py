@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from google import genai
 import sys
+from agent_prompts import setup_prompts
 
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
@@ -20,7 +21,11 @@ def main():
         flags = args[1:]
 
     response = client.models.generate_content(
-        model='gemini-2.0-flash-001', contents=contents
+        model='gemini-2.0-flash-001',
+        contents=contents,
+        config={
+            'system_instruction':setup_prompts
+        }
     )
 
     print(response.text)
