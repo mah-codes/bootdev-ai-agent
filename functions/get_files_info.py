@@ -4,8 +4,6 @@ import sys
 
 def get_files_info(working_directory, directory="."):
     """given a working_directory, prints 1 level down of files/dir details"""
-    # print(f'working_directory: {working_directory}')
-    # print(f'directory: {directory}')
     tgt_dir = os.path.join(working_directory, directory)
     abs_tgt = os.path.abspath(tgt_dir)
     abs_working = os.path.abspath(working_directory)

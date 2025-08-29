@@ -15,6 +15,7 @@ def run_python_file(working_directory, file_path, args=[]):
     if abs_fp[-3:] != ".py":
         return f'Error: "{file_path}" is not a Python file.'
 
+    # FIX: the below safe-guard for 30s is not working
     seconds_now = time.time() - 1
     while True:
         run_args = ['python3', abs_fp] + args
