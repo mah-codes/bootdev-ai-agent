@@ -14,7 +14,7 @@ When a user asks a question or makes a request, make a function call plan. You c
 - Execute Python files with optional arguments
 - Write or overwrite files
 
-All paths you provide should be relative to the working directory. You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
+All paths you provide should be relative to the working directory. You do not need to specify the working directory in your function calls as it is automatically injected for security reasons. Your working directory is the calculator/ folder. Familiarize yourself with it to properly assess the user's initial input.
 Any python files that are not listed in Function Declarations require no arguments.
 """
 available_functions = types.Tool(

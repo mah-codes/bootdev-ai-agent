@@ -14,6 +14,7 @@ function_map = {
 
 def call_function(function_call_part, verbose=False):
     fn_name = function_call_part.name
+    call_id = getattr(function_call_part, 'id', None)
     if verbose:
         print(f"Calling function: {fn_name}({function_call_part.args})") 
     else:
@@ -21,25 +22,19 @@ def call_function(function_call_part, verbose=False):
 
     # hard-coded working directory of "./calculator" for safety in this project
     fn_args = {'working_directory': './calculator', **function_call_part.args}
-    # print(f"*** for testing ***\n{fn_args}\n******")
     if fn_name in list(function_map.keys()):
         fn_result = function_map[fn_name](**fn_args)
-        return types.Content(
-            role="tool",
-            parts=[
-                types.Part.from_function_response(
-                    name=fn_name,
-                    response={"result": fn_result},
-                )
-            ],
-        )
+        payload = {"result": fn_result}
     else:
-        return types.Content(
-            role="tool",
-            parts=[
-                types.Part.from_function_response(
-                    name=fn_name,
-                    response={"error": f"Unknown function: {fn_name}"},
-                )
-            ],
-        )
+        payload = {"error": f"Unknown function: {fn_name}"}
+    return types.Content(
+        role="user",
+        parts=[
+            types.Part.from_function_response(
+                name=fn_name,
+                # id=call_id,
+                response=payload,
+            )
+        ],
+    )
+   
